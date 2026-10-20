@@ -12,6 +12,7 @@ interface State {
   chats: Record<string, ChatSession>;
   currentChatId: string | null;
   selectedModel: string | null;
+  webSearchEnabled: boolean;
   userName: string | "Anonymous";
   isDownloading: boolean;
   downloadProgress: number;
@@ -21,6 +22,7 @@ interface State {
 interface Actions {
   setBase64Images: (base64Images: string[] | null) => void;
   setCurrentChatId: (chatId: string) => void;
+  setWebSearchEnabled: (enabled: boolean) => void;
   setSelectedModel: (selectedModel: string) => void;
   getChatById: (chatId: string) => ChatSession | undefined;
   getMessagesById: (chatId: string) => Message[];
@@ -39,6 +41,7 @@ const useChatStore = create<State & Actions>()(
       chats: {},
       currentChatId: null,
       selectedModel: null,
+      webSearchEnabled: false,
       userName: "Anonymous",
       isDownloading: false,
       downloadProgress: 0,
@@ -48,6 +51,7 @@ const useChatStore = create<State & Actions>()(
       setUserName: (userName) => set({ userName }),
 
       setCurrentChatId: (chatId) => set({ currentChatId: chatId }),
+      setWebSearchEnabled: (webSearchEnabled) => set({ webSearchEnabled }),
       setSelectedModel: (selectedModel) => set({ selectedModel }),
       getChatById: (chatId) => {
         const state = get();
@@ -113,6 +117,7 @@ const useChatStore = create<State & Actions>()(
         chats: state.chats,
         currentChatId: state.currentChatId,
         selectedModel: state.selectedModel,
+        webSearchEnabled: state.webSearchEnabled,
         userName: state.userName,
       }),
     }
