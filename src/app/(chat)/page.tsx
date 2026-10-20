@@ -14,6 +14,11 @@ import React from "react";
 import useChatStore from "../hooks/useChatStore";
 
 export default function Home() {
+  const newChatVersion = useChatStore((state) => state.newChatVersion);
+  return <NewChat key={newChatVersion} />;
+}
+
+function NewChat() {
   const [id] = React.useState(generateUUID);
   const [open, setOpen] = React.useState(false);
   const userName = useChatStore((state) => state.userName);
